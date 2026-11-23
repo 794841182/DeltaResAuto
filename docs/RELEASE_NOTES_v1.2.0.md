@@ -9,8 +9,8 @@ Windows 10/11 游戏分辨率自动切换工具：进游戏切到 4:3 高刷，�
 ## 校验
 
 ```text
-9baf771ad6b9a41feca2bf1d3e5e89f748e9c50400015005392ca9a2acfad2f8 *DeltaResAuto_v1.2.0_setup.exe
-2509419b2ef5c758458056ad7824ce4723da6b35dd76dae8531cd6ca87bbae04 *DeltaResAuto_v1.2.0_portable.exe
+14f8c889df4ac8785e5a0eda65159e78154ca8d5bd2c236fcfa83713ea511c39 *DeltaResAuto_v1.2.0_setup.exe
+8a286f0542c5f076dd6da696f8e869d6b5bb8e2eb304972d14c0f8476c2f0627 *DeltaResAuto_v1.2.0_portable.exe
 ```
 
 ## 本次更新
