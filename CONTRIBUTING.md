@@ -1,4 +1,4 @@
-# 参与 DeltaResAuto
+# 参与 ResPilot
 
 ## 报告问题
 
@@ -9,7 +9,7 @@
 - 显示器分辨率、刷新率、缩放比例
 - 游戏名称与进程名
 - 复现步骤，以及切换前 / 切换后的分辨率
-- `%LOCALAPPDATA%\DeltaResAuto\auto.log` 或 `crash.log` 的相关片段
+- `%LOCALAPPDATA%\ResPilot\auto.log` 或 `crash.log` 的相关片段
 
 不要在公开 Issue 里贴完整配置、账号信息或带有个人路径的截图。
 

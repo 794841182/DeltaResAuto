@@ -1,4 +1,4 @@
-自动检测分辨率 v1.3.0
+ResPilot v1.4.0
 桌面分辨率自动切换工具 · 冷渡-Van1sh
 
 一、它是做什么的
@@ -22,7 +22,7 @@
   选“跟随系统”＝沿用当前桌面刷新率。选了具体 Hz 后，判断“是否已切换”会同时比较分辨率与刷新率。
 
 五、配置与备份（重点）
-  配置目录：%LOCALAPPDATA%\DeltaResAuto
+  配置目录：%LOCALAPPDATA%\ResPilot
     settings.ini          当前配置
     settings.ini.bak      上一次的配置
     backup\               历史备份（settings-时间.ini，最多保留 10 份；安装升级时另有 install-时间.ini）
@@ -32,7 +32,7 @@
   写入配置时，只有内容真的变了才会先备份旧文件，避免刷屏式备份。
 
 六、卸载
-  在 Windows“设置 → 应用”里找到“自动检测分辨率”卸载，或运行安装目录下的 uninstall.exe。
+  在 Windows“设置 → 应用”里找到“ResPilot”卸载，或运行安装目录下的 uninstall.exe。
   卸载默认保留配置与备份；需要彻底清理时勾选“同时删除配置与备份”。
 
 七、文件完整性

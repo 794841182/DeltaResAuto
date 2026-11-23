@@ -4,7 +4,7 @@
 
 - 读取进程列表，判断配置里指定的游戏是否在运行。
 - 调用 Windows `ChangeDisplaySettingsEx` 切换分辨率与刷新率。
-- 读写 `%LOCALAPPDATA%\DeltaResAuto` 下的配置、日志和备份。
+- 读写 `%LOCALAPPDATA%\ResPilot` 下的配置、日志和备份。
 - 可选写入 HKCU 开机自启项和卸载项。
 
 它不联网、不上传配置、不注入游戏进程、不修改游戏文件。

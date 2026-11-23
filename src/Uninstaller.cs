@@ -13,18 +13,18 @@ namespace DeltaResUninstall
 {
     static class Info
     {
-        public const string AppName = "自动检测分辨率";
-        public const string ExeName = "自动检测分辨率.exe";
-        public const string RegKey = @"Software\Microsoft\Windows\CurrentVersion\Uninstall\DeltaResAuto";
-        public const string RunValue = "DeltaResAuto";
-        public const string LogPath = @"%TEMP%\DeltaResAuto_uninstall.log";
+        public const string AppName = "ResPilot";
+        public const string ExeName = "ResPilot.exe";
+        public const string RegKey = @"Software\Microsoft\Windows\CurrentVersion\Uninstall\ResPilot";
+        public const string RunValue = "ResPilot";
+        public const string LogPath = @"%TEMP%\ResPilot_uninstall.log";
     }
 
     static class Core
     {
         public static string CfgDir()
         {
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "DeltaResAuto");
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ResPilot");
         }
 
         // 只删安装清单里的文件，避免用户把程序装进已有目录时误删其他文件
@@ -74,7 +74,7 @@ namespace DeltaResUninstall
         {
             try
             {
-                Process[] ps = Process.GetProcessesByName("自动检测分辨率");
+                Process[] ps = Process.GetProcessesByName("ResPilot");
                 for (int i = 0; i < ps.Length; i++)
                 {
                     try { ps[i].Kill(); ps[i].WaitForExit(3000); } catch { }
@@ -92,7 +92,7 @@ namespace DeltaResUninstall
             catch { }
             try
             {
-                string d = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Programs), "DeltaResAuto");
+                string d = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Programs), "ResPilot");
                 if (Directory.Exists(d)) Directory.Delete(d, true);
             }
             catch { }

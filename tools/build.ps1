@@ -1,4 +1,4 @@
-# 自动检测分辨率 v1.3.0 构建脚本
+# ResPilot v1.4.0 构建脚本
 # 用法: powershell -ExecutionPolicy Bypass -File .\tools\build.ps1 [-OutDir <目录>]
 
 param([string]$OutDir = "")
@@ -6,7 +6,7 @@ param([string]$OutDir = "")
 $ErrorActionPreference = "Stop"
 $Root = Split-Path $PSScriptRoot -Parent
 $Csc  = "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe"
-$Ver  = "1.3.0"
+$Ver  = "1.4.0"
 if (-not $OutDir) { $OutDir = Join-Path $Root "dist" }
 
 if (-not (Test-Path $Csc)) { throw "找不到 csc.exe: $Csc" }
@@ -31,7 +31,7 @@ Invoke-Csc @(
     "/resource:$Root\res\mis_m_s.ttf,mis_m.ttf",
     "/resource:$Root\res\bg_theme.jpg,bg_theme.jpg",
     "$Root\src\VersionInfo.cs",
-    "$Root\src\DeltaResAuto.cs"
+    "$Root\src\ResPilot.cs"
 )
 
 Write-Host "[2/4] 编译卸载器"
@@ -57,8 +57,8 @@ $lines = foreach ($n in $files) {
 [System.IO.File]::WriteAllLines("$Payload\manifest.txt", $lines, (New-Object System.Text.UTF8Encoding($false)))
 
 Write-Host "[4/4] 编译安装器"
-$SetupName = "DeltaResAuto_v" + $Ver + "_setup.exe"
-$PortableName = "DeltaResAuto_v" + $Ver + "_portable.exe"
+$SetupName = "ResPilot_v" + $Ver + "_setup.exe"
+$PortableName = "ResPilot_v" + $Ver + "_portable.exe"
 $Setup = Join-Path $OutDir $SetupName
 Invoke-Csc @(
     "/nologo", "/target:winexe", "/optimize+", "/codepage:65001",

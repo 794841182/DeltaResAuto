@@ -13,7 +13,7 @@ using System.Threading;
 using System.Windows.Forms;
 using Microsoft.Win32;
 
-namespace DeltaResAuto
+namespace ResPilot
 {
     // ================= 系统接口 =================
     public static class Native
@@ -372,7 +372,29 @@ namespace DeltaResAuto
 
         public static string Dir()
         {
-            string d = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "DeltaResAuto");
+            string d = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ResPilot");
+            string legacy = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Delta" + "ResAuto");
+            try
+            {
+                if (!Directory.Exists(d) && Directory.Exists(legacy))
+                {
+                    Directory.CreateDirectory(d);
+                    foreach (string name in new string[] { "settings.ini", "settings.ini.bak", "show.flag" })
+                    {
+                        string src = Path.Combine(legacy, name);
+                        if (File.Exists(src)) File.Copy(src, Path.Combine(d, name), true);
+                    }
+                    string oldBackup = Path.Combine(legacy, "backup");
+                    string newBackup = Path.Combine(d, "backup");
+                    if (Directory.Exists(oldBackup))
+                    {
+                        Directory.CreateDirectory(newBackup);
+                        foreach (string src in Directory.GetFiles(oldBackup, "*.ini"))
+                            File.Copy(src, Path.Combine(newBackup, Path.GetFileName(src)), true);
+                    }
+                }
+            }
+            catch { }
             try { Directory.CreateDirectory(d); } catch { }
             return d;
         }
@@ -1597,7 +1619,7 @@ namespace DeltaResAuto
         // 并且文字按“整数设备像素”栅格化，不会因为缩放矩阵而发虚
         public static readonly string FontDir = System.IO.Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "DeltaResAuto", "fonts");
+            "ResPilot", "fonts");
 
         static readonly string[] fontFiles = new string[] { "mis_r.ttf", "mis_m.ttf" };
 
@@ -2507,7 +2529,7 @@ namespace DeltaResAuto
             dev = cfg.DisplayDevice != null && cfg.DisplayDevice.Length > 0 ? cfg.DisplayDevice : Native.PrimaryDevice();
             if (dev == null) dev = @"\\.\DISPLAY1";
 
-            Text = "自动检测分辨率";
+            Text = "ResPilot";
             AutoScaleMode = AutoScaleMode.None;      // 手动按 DPI 缩放，绝不让 WinForms 自己按字体算
             FormBorderStyle = FormBorderStyle.None;
             StartPosition = FormStartPosition.CenterScreen;
@@ -2961,7 +2983,7 @@ namespace DeltaResAuto
                 g.FillRectangle(ab, 20, 15, 3, 26);
             using (SolidBrush ab2 = new SolidBrush(Color.FromArgb(UC.Light ? 130 : 96, UC.Accent)))
                 g.FillRectangle(ab2, 20, 45, 3, 12);
-            UC.Text(g, "自动检测分辨率", UC.Title, new Rectangle(31, 14, 260, 28), UC.Ink,
+            UC.Text(g, "ResPilot", UC.Title, new Rectangle(31, 14, 260, 28), UC.Ink,
                 TextFormatFlags.VerticalCenter);
             UC.Text(g, "桌面分辨率 · 全自动切换", UC.Tiny, new Rectangle(31, 44, 270, 14), UC.Ink3,
                 TextFormatFlags.VerticalCenter);
@@ -4070,7 +4092,7 @@ namespace DeltaResAuto
             }
             catch { }
             if (tray.Icon == null) tray.Icon = SystemIcons.Application;
-            tray.Text = "自动检测分辨率 · 自动监听中";
+            tray.Text = "ResPilot · 自动监听中";
             tray.Visible = true;
             tray.DoubleClick += delegate { EnsurePanel(); };
 
@@ -4150,7 +4172,7 @@ namespace DeltaResAuto
             try
             {
                 if (Context == null || Context.Tray == null) return;
-                Context.Tray.BalloonTipTitle = "自动检测分辨率";
+                Context.Tray.BalloonTipTitle = "ResPilot";
                 Context.Tray.BalloonTipText = text;
                 Context.Tray.ShowBalloonTip(2500);
             }
@@ -4163,7 +4185,7 @@ namespace DeltaResAuto
             {
                 Process.Start(new ProcessStartInfo
                 {
-                    FileName = "https://github.com/794841182/DeltaResAuto/issues/new/choose",
+                    FileName = "https://github.com/Van1sh-LDu/ResPilot/issues/new/choose",
                     UseShellExecute = true
                 });
             }
@@ -4181,7 +4203,7 @@ namespace DeltaResAuto
             try
             {
                 using (RegistryKey k = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", false))
-                    return k != null && k.GetValue("DeltaResAuto") != null;
+                    return k != null && k.GetValue("ResPilot") != null;
             }
             catch { return false; }
         }
@@ -4193,8 +4215,8 @@ namespace DeltaResAuto
                 using (RegistryKey k = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true))
                 {
                     if (k == null) return;
-                    if (on) k.SetValue("DeltaResAuto", "\"" + Application.ExecutablePath + "\" --bg");
-                    else k.DeleteValue("DeltaResAuto", false);
+                    if (on) k.SetValue("ResPilot", "\"" + Application.ExecutablePath + "\" --bg");
+                    else k.DeleteValue("ResPilot", false);
                 }
             }
             catch { }
@@ -4224,7 +4246,7 @@ namespace DeltaResAuto
                 try
                 {
                     MessageBox.Show("程序遇到错误：" + ex.Message + "\r\n\r\n日志已记录到：\r\n" + path,
-                        "自动检测分辨率", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        "ResPilot", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 catch { }
             }
@@ -4307,7 +4329,7 @@ namespace DeltaResAuto
             }
 
             bool created;
-            Mutex mtx = new Mutex(true, "DeltaResAuto_SingleInstance_v1", out created);
+            Mutex mtx = new Mutex(true, "ResPilot_SingleInstance_v1", out created);
             if (!created)
             {
                 try { File.WriteAllText(Settings.ShowFlag(), "1"); } catch { }

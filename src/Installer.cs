@@ -15,14 +15,14 @@ namespace DeltaResSetup
 {
     static class Info
     {
-        public const string AppName = "自动检测分辨率";
-        public const string Version = "1.3.0";
+        public const string AppName = "ResPilot";
+        public const string Version = "1.4.0";
         public const string Publisher = "冷渡-Van1sh";
-        public const string ExeName = "自动检测分辨率.exe";
+        public const string ExeName = "ResPilot.exe";
         public const string UninstallName = "uninstall.exe";
-        public const string RegKey = @"Software\Microsoft\Windows\CurrentVersion\Uninstall\DeltaResAuto";
-        public const string RunValue = "DeltaResAuto";
-        public const string LogPath = @"%TEMP%\DeltaResAuto_setup.log";
+        public const string RegKey = @"Software\Microsoft\Windows\CurrentVersion\Uninstall\ResPilot";
+        public const string RunValue = "ResPilot";
+        public const string LogPath = @"%TEMP%\ResPilot_setup.log";
     }
 
     static class Res
@@ -114,12 +114,12 @@ namespace DeltaResSetup
         public static string DefaultDir()
         {
             return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                @"Programs\DeltaResAuto");
+                @"Programs\ResPilot");
         }
 
         public static string CfgDir()
         {
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "DeltaResAuto");
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ResPilot");
         }
 
         public static void Log(string text)
@@ -136,10 +136,14 @@ namespace DeltaResSetup
         {
             try
             {
-                Process[] ps = Process.GetProcessesByName("自动检测分辨率");
-                for (int i = 0; i < ps.Length; i++)
+                string[] names = new string[] { "ResPilot", "自动检测分辨率" };
+                for (int n = 0; n < names.Length; n++)
                 {
-                    try { ps[i].Kill(); ps[i].WaitForExit(3000); } catch { }
+                    Process[] ps = Process.GetProcessesByName(names[n]);
+                    for (int i = 0; i < ps.Length; i++)
+                    {
+                        try { ps[i].Kill(); ps[i].WaitForExit(3000); } catch { }
+                    }
                 }
             }
             catch { }
@@ -230,7 +234,7 @@ namespace DeltaResSetup
 
         public static string StartLink()
         {
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Programs), "DeltaResAuto", Info.AppName + ".lnk");
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Programs), "ResPilot", Info.AppName + ".lnk");
         }
 
         public static void MakeLink(string lnk, string target, string desc)
@@ -279,6 +283,7 @@ namespace DeltaResSetup
                     if (k == null) return;
                     if (on) k.SetValue(Info.RunValue, "\"" + Path.Combine(dir, Info.ExeName) + "\" --bg");
                     else k.DeleteValue(Info.RunValue, false);
+                    k.DeleteValue("Delta" + "ResAuto", false);
                 }
             }
             catch { }
@@ -294,6 +299,7 @@ namespace DeltaResSetup
                     string f = Path.Combine(dir, Payload.Files[i][1]);
                     if (File.Exists(f)) size += new FileInfo(f).Length;
                 }
+                try { Registry.CurrentUser.DeleteSubKeyTree(@"Software\Microsoft\Windows\CurrentVersion\Uninstall\Delta" + "ResAuto", false); } catch { }
                 using (RegistryKey k = Registry.CurrentUser.CreateSubKey(Info.RegKey))
                 {
                     k.SetValue("DisplayName", Info.AppName);

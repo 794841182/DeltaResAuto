@@ -1,10 +1,10 @@
-# DeltaResAuto · 自动检测分辨率
+# ResPilot · 分辨率自动巡航
 
 Windows 10/11 游戏分辨率自动切换工具，面向原生 4K、2K 及以上屏幕、想在全屏无边框下用 1K 拉满帧率的玩家；对习惯 4:3 的 FPS 玩家也很友好。
 
 进游戏自动切到设定的游戏分辨率、画面比例与刷新率：原生 4K/2K 屏，想在全屏无边框下用 1920×1080（1K）拉满帧率；习惯 4:3 拉伸的玩家，也能直接选 4:3 比例。退出后默认恢复屏幕最高分辨率，刷新率、缩放和布局也一并还原。游戏分辨率、画面比例、刷新率、恢复方式、主题都可自定义。
 
-![自动检测分辨率 米白主题](docs/screenshot-cream.png)
+![ResPilot 米白主题](docs/screenshot-cream.png)
 
 **下载**：[最新 Release](../../releases/latest) · **反馈**：[GitHub Issues](../../issues) · **License**：[MIT](LICENSE.txt)
 
@@ -33,8 +33,8 @@ Windows 10/11 游戏分辨率自动切换工具，面向原生 4K、2K 及以上
 
 | 文件 | 用途 |
 | --- | --- |
-| `DeltaResAuto_v1.3.0_setup.exe` | 安装版，双击安装，默认装到 `%LOCALAPPDATA%\Programs\DeltaResAuto`，不需要管理员权限 |
-| `DeltaResAuto_v1.3.0_portable.exe` | 便携版，免安装，直接运行 |
+| `ResPilot_v1.4.0_setup.exe` | 安装版，双击安装，默认装到 `%LOCALAPPDATA%\Programs\ResPilot`，不需要管理员权限 |
+| `ResPilot_v1.4.0_portable.exe` | 便携版，免安装，直接运行 |
 | `SHA256SUMS.txt` | 发布包 SHA256，下载后可核对 |
 
 > 当前 Release 使用 ASCII 文件名；安装包未做代码签名，首次运行可能触发 Windows SmartScreen。介意的话可以先用源码自行构建，或核对 SHA256 后再运行。
@@ -83,7 +83,7 @@ Windows 10/11 游戏分辨率自动切换工具，面向原生 4K、2K 及以上
 
 ## 配置与备份
 
-配置目录 `%LOCALAPPDATA%\DeltaResAuto`：
+配置目录 `%LOCALAPPDATA%\ResPilot`：
 
 ```text
 settings.ini          当前配置
@@ -102,7 +102,7 @@ fonts\                内嵌字体解压缓存
 
 安装器是自绘的单文件 EXE，内嵌程序、卸载器和 SHA256 清单：
 
-- 默认安装到 `%LOCALAPPDATA%\Programs\DeltaResAuto`，普通权限
+- 默认安装到 `%LOCALAPPDATA%\Programs\ResPilot`，普通权限
 - 可选桌面快捷方式、开机自启、安装后立即运行
 - 安装前备份已有配置到 `backup\install-时间.ini`
 - 释放前后各做一次 SHA256 校验，不一致会中止
@@ -111,7 +111,7 @@ fonts\                内嵌字体解压缓存
 静默参数：
 
 ```text
-DeltaResAuto_v1.3.0_setup.exe /S /D=C:\Path /NOSHORTCUT /NOAUTOSTART /NORUN
+ResPilot_v1.4.0_setup.exe /S /D=C:\Path /NOSHORTCUT /NOAUTOSTART /NORUN
 uninstall.exe /S [/DELCONFIG]
 ```
 
@@ -129,8 +129,8 @@ Get-Content manifest.sha256 | ForEach-Object {
 需要 Windows + .NET Framework 4.x（系统自带 `csc.exe` 即可），不需要 Visual Studio。
 
 ```powershell
-git clone https://github.com/Van1sh-LDu/DeltaResAuto.git
-cd DeltaResAuto
+git clone https://github.com/Van1sh-LDu/ResPilot.git
+cd ResPilot
 powershell -ExecutionPolicy Bypass -File .\tools\build.ps1
 ```
 
@@ -139,7 +139,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\build.ps1
 ## 项目结构
 
 ```text
-src\DeltaResAuto.cs      主程序
+src\ResPilot.cs      主程序
 src\Installer.cs         安装器
 src\Uninstaller.cs       卸载器
 src\VersionInfo.cs       程序集版本信息
