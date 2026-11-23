@@ -1,12 +1,10 @@
-# DeltaResAuto v1.2.0
-
 Windows 10/11 游戏分辨率自动切换工具：进游戏切到 4:3 高刷，退出后自动恢复原来的桌面分辨率、刷新率、缩放和布局。
 
 ## 下载
 
-- `DeltaResAuto_v1.2.0_setup.exe` — 安装版，默认装到 `%LOCALAPPDATA%\Programs\DeltaResAuto`，不需要管理员权限
-- `DeltaResAuto_v1.2.0_portable.exe` — 便携版，免安装
-- `SHA256SUMS.txt` — 发布包校验值
+- [安装版](https://github.com/794841182/DeltaResAuto/releases/download/v1.2.0/DeltaResAuto_v1.2.0_setup.exe) — 默认装到 `%LOCALAPPDATA%\Programs\DeltaResAuto`，不需要管理员权限
+- [便携版](https://github.com/794841182/DeltaResAuto/releases/download/v1.2.0/DeltaResAuto_v1.2.0_portable.exe) — 免安装
+- [SHA256SUMS.txt](https://github.com/794841182/DeltaResAuto/releases/download/v1.2.0/SHA256SUMS.txt) — 发布包校验值
 
 ## 校验
 
