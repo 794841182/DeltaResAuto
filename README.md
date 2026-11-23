@@ -131,6 +131,7 @@ settings.example.ini     配置示例
 ## 参与
 
 - 遇到问题先开 [Issue](../../issues)，附 Windows 版本、显卡/显示器、游戏名和复现步骤。
+- 软件右下角和托盘菜单也提供 GitHub Issues 入口。
 - 接受 PR，但涉及分辨率切换的改动需要说明测试环境。
 - 作者：冷渡-Van1sh
 

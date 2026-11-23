@@ -2473,6 +2473,7 @@ namespace DeltaResAuto
         private readonly Rectangle rcStatus = new Rectangle(20, 68, 380, 96);
         private readonly Rectangle rcRes = new Rectangle(20, 388, 380, 148);
         private readonly Rectangle rcLog = new Rectangle(20, 763, 380, 44);
+        private readonly Rectangle rcIssues = new Rectangle(206, 810, 192, 30);
         private Bitmap bgCache;
         private static Image BgImage;
 
@@ -2588,6 +2589,7 @@ namespace DeltaResAuto
             if (rcDeskRes.Contains(p)) return "dres";
             if (rcDelay.Contains(p)) return "delay";
             if (rcPoll.Contains(p)) return "poll";
+            if (rcIssues.Contains(p)) return "issues";
             return "";
         }
 
@@ -2667,6 +2669,7 @@ namespace DeltaResAuto
                 case "ghz": ShowHzMenu(); break;
                 case "delay": ShowPick(true); break;
                 case "poll": ShowPick(false); break;
+                case "issues": Runtime.OpenIssues(); break;
             }
         }
 
@@ -3057,8 +3060,9 @@ namespace DeltaResAuto
             // 作者信息
             UC.Text(g, "作者  冷渡-Van1sh", UC.Tiny, new Rectangle(22, 817, 180, 18),
                 UC.Ink3, TextFormatFlags.VerticalCenter);
-            UC.Text(g, "BUG 反馈  794841182", UC.Tiny, new Rectangle(218, 817, 180, 18),
-                UC.Ink3, TextFormatFlags.Right | TextFormatFlags.VerticalCenter);
+            UC.Text(g, "BUG 反馈 · GitHub Issues", UC.Tiny, new Rectangle(218, 817, 180, 18),
+                hotId == "issues" ? UC.Accent : UC.Ink3,
+                TextFormatFlags.Right | TextFormatFlags.VerticalCenter);
 
             PaintWidgets(g);
         }
@@ -3953,9 +3957,12 @@ namespace DeltaResAuto
             cm.Items.Add(mRestore);
             cm.Items.Add(new ToolStripSeparator());
             cm.Items.Add(mExit);
-            ToolStripMenuItem mAbout = new ToolStripMenuItem("作者 冷渡-Van1sh · BUG 反馈 794841182");
+            ToolStripMenuItem mAbout = new ToolStripMenuItem("作者 冷渡-Van1sh");
             mAbout.Enabled = false;
+            ToolStripMenuItem mIssues = new ToolStripMenuItem("反馈问题 · GitHub Issues");
+            mIssues.Click += delegate { Runtime.OpenIssues(); };
             cm.Items.Add(mAbout);
+            cm.Items.Add(mIssues);
             tray.ContextMenuStrip = cm;
 
             eng.Start();
@@ -4009,6 +4016,19 @@ namespace DeltaResAuto
                 Context.Tray.BalloonTipTitle = "自动检测分辨率";
                 Context.Tray.BalloonTipText = text;
                 Context.Tray.ShowBalloonTip(2500);
+            }
+            catch { }
+        }
+
+        public static void OpenIssues()
+        {
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = "https://github.com/794841182/DeltaResAuto/issues/new/choose",
+                    UseShellExecute = true
+                });
             }
             catch { }
         }
