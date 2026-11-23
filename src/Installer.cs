@@ -16,7 +16,7 @@ namespace DeltaResSetup
     static class Info
     {
         public const string AppName = "自动检测分辨率";
-        public const string Version = "1.2.0";
+        public const string Version = "1.3.0";
         public const string Publisher = "冷渡-Van1sh";
         public const string ExeName = "自动检测分辨率.exe";
         public const string UninstallName = "uninstall.exe";

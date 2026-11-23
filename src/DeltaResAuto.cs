@@ -1358,10 +1358,19 @@ namespace DeltaResAuto
 
         private void DoRestore()
         {
+            DoRestore(false);
+        }
+
+        private void DoRestore(bool forceDesk)
+        {
             if (!Switched && !_savedValid)
             {
-                Log("当前没有需要恢复的显示模式");
-                return;
+                if (!forceDesk)
+                {
+                    Log("当前没有需要恢复的显示模式");
+                    return;
+                }
+                Log("没有切换记录，按桌面分辨率设置恢复");
             }
             if (DateTime.Now < _retryAt) return;
 
@@ -1404,7 +1413,7 @@ namespace DeltaResAuto
         {
             _retryAt = DateTime.MinValue;
             _failStreak = 0;
-            DoRestore();
+            DoRestore(true);
         }
 
         public void Log(string msg)
@@ -2450,6 +2459,8 @@ namespace DeltaResAuto
         private readonly Rectangle rcScale = new Rectangle(234, 294, 88, 24);
         private readonly Rectangle rcScreen = new Rectangle(146, 294, 84, 24);
         private readonly Rectangle rcTheme = new Rectangle(326, 294, 82, 24);
+        private readonly Rectangle rcGameAspect = new Rectangle(132, 397, 80, 30);
+        private readonly Rectangle rcDeskAspect = new Rectangle(132, 497, 80, 30);
 
         private static int UISize(int v) { return UC.PX(v); }
 
@@ -2575,6 +2586,8 @@ namespace DeltaResAuto
             if (rcClose.Contains(p)) return "close";
             if (rcMin.Contains(p)) return "min";
             if (rcAdd.Contains(p)) return "addgame";
+            if (rcGameAspect.Contains(p)) return "gaspect";
+            if (rcDeskAspect.Contains(p)) return "dasp";
             if (rcScreen.Contains(p)) return "screen";
             if (rcScale.Contains(p)) return "scale";
             if (rcTheme.Contains(p)) return "theme";
@@ -2648,6 +2661,8 @@ namespace DeltaResAuto
                 case "addgame": AddGameFromFile(); break;
                 case "scale": ShowScaleMenu(); break;
                 case "theme": ShowThemeMenu(); break;
+                case "gaspect": ShowAspectMenu(true); break;
+                case "dasp": ShowAspectMenu(false); break;
                 case "screen": ShowScreenMenu(); break;
                 case "apply": ApplyUI(); break;
                 case "restore": eng.ForceRestore(); RefreshState(); break;
@@ -3008,9 +3023,21 @@ namespace DeltaResAuto
 
             // 分辨率卡
             UC.Card(g, rcRes, 14);
-            UC.Text(g, "游戏运行时", UC.Body, new Rectangle(40, 400, 170, 24), UC.Ink2, TextFormatFlags.VerticalCenter);
-            UC.Text(g, "刷新率", UC.Body, new Rectangle(40, 450, 170, 24), UC.Ink2, TextFormatFlags.VerticalCenter);
-            UC.Text(g, "退出游戏后", UC.Body, new Rectangle(40, 500, 170, 24), UC.Ink2, TextFormatFlags.VerticalCenter);
+            UC.Text(g, "游戏运行时", UC.Body, new Rectangle(40, 400, 84, 24), UC.Ink2, TextFormatFlags.VerticalCenter);
+            UC.Text(g, "刷新率", UC.Body, new Rectangle(40, 450, 84, 24), UC.Ink2, TextFormatFlags.VerticalCenter);
+            UC.Text(g, "退出游戏后", UC.Body, new Rectangle(40, 500, 84, 24), UC.Ink2, TextFormatFlags.VerticalCenter);
+
+            bool hga = hotId == "gaspect" || downId == "gaspect";
+            Chip(g, rcGameAspect, 8, hga);
+            UC.Text(g, "比例 " + AspectLabel(true), UC.Tiny, rcGameAspect,
+                hga ? Color.FromArgb(UC.Ink.R, UC.Ink.G, UC.Ink.B) : UC.Ink2,
+                TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
+
+            bool hda = hotId == "dasp" || downId == "dasp";
+            Chip(g, rcDeskAspect, 8, hda);
+            UC.Text(g, "比例 " + AspectLabel(false), UC.Tiny, rcDeskAspect,
+                hda ? Color.FromArgb(UC.Ink.R, UC.Ink.G, UC.Ink.B) : UC.Ink2,
+                TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter);
 
             if (resList.Length > 0)
             {
@@ -3667,6 +3694,116 @@ namespace DeltaResAuto
             if (deskResIdx < 0) deskResIdx = 0;
         }
 
+        private string AspectLabel(bool isGame)
+        {
+            int idx = isGame ? gameResIdx : deskResIdx;
+            int w, h;
+            if (resList.Length > 0 && idx >= 0 && idx < resList.Length
+                && ParseRes(resList[idx], out w, out h))
+                return RatioKey(w, h);
+            return RatioKey(isGame ? cfg.GameW : cfg.DeskW, isGame ? cfg.GameH : cfg.DeskH);
+        }
+
+        private static string RatioKey(int w, int h)
+        {
+            if (w <= 0 || h <= 0) return "自动";
+            double r = (double)w / h;
+            if (Math.Abs(r - 16.0 / 9.0) < 0.02) return "16:9";
+            if (Math.Abs(r - 16.0 / 10.0) < 0.02) return "16:10";
+            if (Math.Abs(r - 4.0 / 3.0) < 0.02) return "4:3";
+            if (Math.Abs(r - 21.0 / 9.0) < 0.06) return "21:9";
+            if (Math.Abs(r - 32.0 / 9.0) < 0.06) return "32:9";
+            if (Math.Abs(r - 5.0 / 4.0) < 0.02) return "5:4";
+            if (Math.Abs(r - 3.0 / 2.0) < 0.02) return "3:2";
+            int a = w, b = h;
+            while (b != 0) { int t = a % b; a = b; b = t; }
+            return (w / a) + ":" + (h / a);
+        }
+
+        private static int AspectRank(string key)
+        {
+            string[] order = new string[] { "16:9", "16:10", "4:3", "21:9", "32:9", "5:4", "3:2" };
+            for (int i = 0; i < order.Length; i++) if (order[i] == key) return i;
+            return order.Length;
+        }
+
+        private List<string> AvailableAspects()
+        {
+            List<string> keys = new List<string>();
+            for (int i = 0; i < resList.Length; i++)
+            {
+                int w, h;
+                if (!ParseRes(resList[i], out w, out h)) continue;
+                string key = RatioKey(w, h);
+                if (!keys.Contains(key)) keys.Add(key);
+            }
+            keys.Sort(delegate (string a, string b)
+            {
+                int ra = AspectRank(a), rb = AspectRank(b);
+                if (ra != rb) return ra.CompareTo(rb);
+                return a.CompareTo(b);
+            });
+            return keys;
+        }
+
+        private int BestModeForAspect(string key, bool isGame)
+        {
+            int tw = 1920, th = 1080;
+            if (key == "16:10") { tw = 1920; th = 1200; }
+            else if (key == "4:3") { tw = 1440; th = 1080; }
+            else if (key == "21:9") { tw = 2560; th = 1080; }
+            else if (key == "32:9") { tw = 3840; th = 1080; }
+            else if (key == "5:4") { tw = 1280; th = 1024; }
+            else if (key == "3:2") { tw = 1920; th = 1280; }
+
+            if (isGame)
+            {
+                for (int i = 0; i < resList.Length; i++)
+                {
+                    int w, h;
+                    if (ParseRes(resList[i], out w, out h) && w == tw && h == th) return i;
+                }
+            }
+
+            int best = -1;
+            long bestScore = long.MinValue;
+            for (int i = 0; i < resList.Length; i++)
+            {
+                int w, h;
+                if (!ParseRes(resList[i], out w, out h)) continue;
+                if (RatioKey(w, h) != key) continue;
+                long score;
+                if (isGame) score = -Math.Abs(h - th) * 1000L - Math.Abs(w - tw);
+                else score = (long)w * h;
+                if (score > bestScore) { bestScore = score; best = i; }
+            }
+            return best;
+        }
+
+        private void ShowAspectMenu(bool isGame)
+        {
+            List<string> list = AvailableAspects();
+            if (list.Count == 0) return;
+            int cur = list.IndexOf(AspectLabel(isGame));
+            if (cur < 0) cur = 0;
+            PopupMenu(isGame ? rcGameAspect : rcDeskAspect, list.ToArray(), null, cur, 150, delegate (int idx)
+            {
+                if (idx < 0 || idx >= list.Count) return;
+                int ri = BestModeForAspect(list[idx], isGame);
+                if (ri < 0) return;
+                if (isGame)
+                {
+                    gameResIdx = ri;
+                    FillHz();
+                }
+                else
+                {
+                    deskResIdx = ri;
+                }
+                Invalidate();
+            });
+        }
+
         private void FillHz()
         {
             int w = cfg.GameW, h = cfg.GameH;
@@ -3774,7 +3911,7 @@ namespace DeltaResAuto
             if (exe.Length > 0) cfg.GameExes = exe.IndexOf(".exe") >= 0 ? exe : exe + ".exe";
             cfg.Save();
             eng.ApplySettings(cfg);
-            eng.Log("设置已应用：游戏 " + cfg.GameW + "×" + cfg.GameH + (cfg.GameHz > 0 ? " @" + cfg.GameHz + "Hz" : " @跟随系统")
+            eng.Log("设置已应用：游戏 " + cfg.GameW + "×" + cfg.GameH + "（" + RatioKey(cfg.GameW, cfg.GameH) + "）" + (cfg.GameHz > 0 ? " @" + cfg.GameHz + "Hz" : " @跟随系统")
                 + " · 桌面 " + cfg.DeskW + "×" + cfg.DeskH);
             RefreshState();
         }
