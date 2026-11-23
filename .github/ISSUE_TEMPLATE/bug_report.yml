@@ -1,0 +1,64 @@
+name: Bug report
+description: 报告分辨率切换、游戏检测、安装或卸载问题
+title: "[Bug] "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈。请先确认你用的是最新 Release，并尽量把环境写完整。
+  - type: input
+    id: windows
+    attributes:
+      label: Windows 版本
+      placeholder: 例如 Windows 11 23H2 22631
+    validations:
+      required: true
+  - type: input
+    id: gpu
+    attributes:
+      label: 显卡与驱动
+      placeholder: 例如 RTX 4070 / 551.86
+    validations:
+      required: true
+  - type: input
+    id: display
+    attributes:
+      label: 显示器与当前桌面模式
+      placeholder: 例如 2560×1440 360Hz，缩放 125%
+    validations:
+      required: true
+  - type: input
+    id: game
+    attributes:
+      label: 游戏与进程名
+      placeholder: 例如 三角洲行动 / deltaforceclient-win64-shipping.exe
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      placeholder: 1. 打开程序 2. 启动游戏 3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望结果与实际结果
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: 日志片段
+      description: 可贴 auto.log / crash.log 中相关几行，注意删掉个人路径
+      render: text
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: 确认
+      options:
+        - label: 我已尝试最新 Release
+          required: true
+        - label: 我知道这个工具会修改显示设置，并已在可恢复的环境里测试
+          required: true
