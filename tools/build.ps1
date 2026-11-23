@@ -1,4 +1,4 @@
-# 自动检测分辨率 v1.2.0 构建脚本
+# 自动检测分辨率 v1.3.0 构建脚本
 # 用法: powershell -ExecutionPolicy Bypass -File .\tools\build.ps1 [-OutDir <目录>]
 
 param([string]$OutDir = "")
@@ -6,7 +6,7 @@ param([string]$OutDir = "")
 $ErrorActionPreference = "Stop"
 $Root = Split-Path $PSScriptRoot -Parent
 $Csc  = "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe"
-$Ver  = "1.2.0"
+$Ver  = "1.3.0"
 if (-not $OutDir) { $OutDir = Join-Path $Root "dist" }
 
 if (-not (Test-Path $Csc)) { throw "找不到 csc.exe: $Csc" }
