@@ -1,0 +1,25 @@
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build with system csc
+        shell: pwsh
+        run: .\tools\build.ps1
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: DeltaResAuto-v1.2.0
+          path: dist/*
+          if-no-files-found: error
