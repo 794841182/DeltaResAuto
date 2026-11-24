@@ -4,9 +4,11 @@ Windows 10/11 游戏分辨率自动切换工具，面向原生 4K、2K 及以上
 
 进游戏自动切到设定的游戏分辨率、画面比例与刷新率：原生 4K/2K 屏，想在全屏无边框下用 1920×1080（1K）拉满帧率；习惯 4:3 拉伸的玩家，也能直接选 4:3 比例。退出后默认恢复屏幕最高分辨率，刷新率、缩放和布局也一并还原。游戏分辨率、画面比例、刷新率、恢复方式、主题都可自定义。
 
+**[打开 ResPilot 官网 →](https://van1sh-ldu.github.io/ResPilot/)** — 功能说明、真实界面截图与下载入口。
+
 ![ResPilot 米白主题](docs/screenshot-cream.png)
 
-**下载**：[最新 Release](../../releases/latest) · **反馈**：[GitHub Issues](../../issues) · **License**：[MIT](LICENSE.txt)
+**官网**：[van1sh-ldu.github.io/ResPilot](https://van1sh-ldu.github.io/ResPilot/) · **下载**：[最新 Release](../../releases/latest) · **反馈**：[GitHub Issues](../../issues) · **License**：[MIT](LICENSE.txt)
 
 ## 适合谁
 
