@@ -913,7 +913,7 @@ namespace DeltaResSetup
                     new Rectangle(Ui.Z(28), Ui.Z(76), Ui.Z(480), Ui.Z(22)), Ui.Bad,
                     TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.NoPrefix);
 
-            TextRenderer.DrawText(g, "作者 " + Info.Publisher + "   ·   开源 MIT License",
+            TextRenderer.DrawText(g, "作者 " + Info.Publisher + "   ·   保留所有权利 · 禁止二次开发",
                 Ui.F(8f, FontStyle.Regular), new Rectangle(Ui.Z(28), Ui.Z(446), Ui.Z(300), Ui.Z(16)),
                 Color.FromArgb(118, 124, 136), TextFormatFlags.Left | TextFormatFlags.VerticalCenter | TextFormatFlags.NoPrefix);
             TextRenderer.DrawText(g, "SHA256 清单随包提供",

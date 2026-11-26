@@ -8,7 +8,7 @@ Windows 10/11 游戏分辨率自动切换工具，面向原生 4K、2K 及以上
 
 ![ResPilot 米白主题](docs/screenshot-cream.png)
 
-**官网**：[van1sh-ldu.github.io/ResPilot](https://van1sh-ldu.github.io/ResPilot/) · **下载**：[最新 Release](../../releases/latest) · **反馈**：[GitHub Issues](../../issues) · **License**：[MIT](LICENSE.txt)
+**官网**：[van1sh-ldu.github.io/ResPilot](https://van1sh-ldu.github.io/ResPilot/) · **下载**：[最新 Release](../../releases/latest) · **反馈**：[GitHub Issues](../../issues) · **版权**：[保留所有权利](COPYRIGHT.md)
 
 ## 适合谁
 
@@ -154,15 +154,15 @@ settings.example.ini     配置示例
 
 ## 第三方资源
 
-主程序内嵌了 MiSans 字体子集，仓库 `res\` 下还有图标和背景图。MIT 许可证只覆盖本项目代码，不覆盖这些第三方资源；使用与再分发前请阅读 [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)。
+主程序内嵌了 MiSans 字体子集，仓库 `res\` 下还有图标和背景图。本项目许可证只覆盖本项目代码，不覆盖这些第三方资源；使用与再分发前请阅读 [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)。
 
 ## 参与
 
 - 遇到问题先开 [Issue](../../issues)，附 Windows 版本、显卡/显示器、游戏名和复现步骤。
 - 软件右下角和托盘菜单也提供 GitHub Issues 入口。
-- 接受 PR，但涉及分辨率切换的改动需要说明测试环境。
+- 欢迎提交缺陷修复 PR；未经书面许可，不接受功能分叉、二次开发、再发布或商用。
 - 作者：冷渡-Van1sh
 
-## License
+## 版权与授权
 
-[MIT](LICENSE.txt) © 2026 冷渡-Van1sh
+[保留所有权利](COPYRIGHT.md) · [许可条款](LICENSE.txt) © 2026 冷渡-Van1sh

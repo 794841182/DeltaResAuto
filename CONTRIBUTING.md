@@ -32,6 +32,6 @@
 - 界面文案保持现有中文风格；新增设置项要同步 `settings.example.ini` 和 README。
 - P/Invoke 结构体字段顺序不要随意调整，改之前先核对 Windows SDK 定义。
 
-## License
+## 贡献授权
 
-提交代码即表示同意以本仓库的 MIT 许可证发布。第三方字体、图标、背景图不在此授权范围内，见 [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)。
+提交代码即表示同意授予本项目作者永久、免费、不可撤销的使用、修改与再分发该贡献的许可，以便并入本项目。第三方字体、图标、背景图不在此授权范围内，见 [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md)。

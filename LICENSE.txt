@@ -1,21 +1,44 @@
-MIT License
+# ResPilot Proprietary License
 
-Copyright (c) 2026 冷渡-Van1sh
+Copyright (c) 2026 冷渡-Van1sh. All rights reserved.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+ResPilot, including its source code, documentation, visual assets, icons, screenshots, and release packages (the "Software"), is a proprietary work of the copyright holder.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+## 1. Limited permission
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Subject to this license, you may:
+
+- download and run the official, unmodified release binaries for personal, non-commercial use;
+- view the source code published in this repository for reference and security review.
+
+## 2. Prohibited without prior written permission
+
+You may not:
+
+- copy, modify, adapt, translate, or create derivative works of the Software;
+- fork, republish, redistribute, sublicense, sell, rent, lease, or otherwise make the Software available to third parties;
+- use the Software, in whole or in part, for commercial purposes;
+- remove or alter any copyright, attribution, or proprietary notice;
+- use the ResPilot name, logo, icon, or other brand assets in a way that suggests endorsement, affiliation, or an official fork.
+
+## 3. Trademarks
+
+No trademark or brand license is granted. The ResPilot name and visual identity remain the property of the copyright holder.
+
+## 4. Third-party components
+
+Third-party components included in or used by the Software remain under their own licenses. See `THIRD_PARTY_NOTICES.md`. This license does not override those terms.
+
+## 5. Termination
+
+Any breach of this license automatically terminates the permission granted above. On termination, you must stop using and distributing the Software and delete any copies in your possession.
+
+## 6. Disclaimer
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+## 7. Version scope
+
+This license applies to versions and distributions released on or after 2026-11-26. Copies of earlier versions that were released under the MIT License remain under the MIT License for those copies; this change is not retroactive.
+
+For permission requests, contact the author through the repository's issue tracker.

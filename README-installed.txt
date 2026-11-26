@@ -44,8 +44,9 @@ ResPilot v1.4.0
       if ((Get-FileHash $f -Algorithm SHA256).Hash.ToLower() -ne $h) { "损坏: $f" }
     }
 
-八、开源
-  源码与构建脚本随发布包提供，MIT License。可自行编译、修改，保留版权声明即可。
+八、源码与授权
+  源码与构建脚本随发布包提供。ResPilot 为专有作品，保留所有权利；未经书面许可，
+  禁止二次开发、再发布、再分发或商用。详见 LICENSE.txt 与 COPYRIGHT.md。
 
 九、常见问题
   · 切不回去：点“立即恢复桌面分辨率”，或退出程序（正常退出会自动恢复）。

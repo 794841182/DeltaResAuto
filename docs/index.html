@@ -267,6 +267,12 @@ h2{margin:0;font-size:clamp(36px,4.6vw,60px);line-height:1.08;letter-spacing:-.0
 .footer-brand img{width:26px;height:26px;border-radius:7px;opacity:.9}
 .footer-links{display:flex;gap:24px;flex-wrap:wrap;color:var(--dim);font:500 10px/1 var(--mono)}
 .footer-links a:hover{color:var(--mint)}
+.footer-rights{display:flex;align-items:center;gap:13px;margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.05)}
+.rights-mark{width:30px;height:30px;border:1px solid rgba(92,232,205,.35);border-radius:50%;display:grid;place-items:center;color:var(--mint);font:600 15px/1 var(--display);flex:none}
+.rights-copy{display:flex;flex-direction:column;gap:3px}
+.rights-copy b{color:#c7d9d2;font-size:11px;font-weight:600;letter-spacing:.02em}
+.rights-copy span{color:#61766e;font:400 9px/1.5 var(--mono);letter-spacing:.04em}
+.rights-link{margin-left:auto;color:var(--mint);font:500 9px/1 var(--mono);letter-spacing:.1em;white-space:nowrap}
 .footer-bottom{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:24px;color:#52655f;font:400 10px/1.7 var(--mono)}
 .footer-bottom span{max-width:620px}
 .footer-views{display:flex;align-items:center;gap:7px;white-space:nowrap;color:#61766e;letter-spacing:.08em}
@@ -359,6 +365,8 @@ h2{margin:0;font-size:clamp(36px,4.6vw,60px);line-height:1.08;letter-spacing:-.0
   .repo-card{padding:22px}
   .footer{padding:30px 0}
   .footer-links{gap:14px}
+  .footer-rights{flex-wrap:wrap}
+  .rights-link{margin-left:43px}
   .footer-bottom{font-size:9px}
   .modal-panel{width:min(360px,94vw)}
 }
@@ -531,7 +539,7 @@ h2{margin:0;font-size:clamp(36px,4.6vw,60px);line-height:1.08;letter-spacing:-.0
       </div>
       <p class="repo-desc">Windows 10/11 游戏分辨率自动切换。进游戏切 1K/4:3 拉满帧率，退出恢复最高分辨率；支持画面比例、刷新率与自定义。</p>
       <div class="repo-meta">
-        <span>C#</span><span>WinForms</span><span>MIT</span><span>v1.4.0</span><span>Single EXE</span>
+        <span>C#</span><span>WinForms</span><span>All Rights</span><span>v1.4.0</span><span>Single EXE</span>
       </div>
       <a class="repo-link" href="https://github.com/Van1sh-LDu/ResPilot" target="_blank" rel="noopener">
         打开 GitHub 仓库
@@ -550,11 +558,19 @@ h2{margin:0;font-size:clamp(36px,4.6vw,60px);line-height:1.08;letter-spacing:-.0
         <a href="https://github.com/Van1sh-LDu/ResPilot" target="_blank" rel="noopener">GITHUB</a>
         <a href="https://github.com/Van1sh-LDu/ResPilot/releases/tag/v1.4.0" target="_blank" rel="noopener">RELEASE</a>
         <a href="https://github.com/Van1sh-LDu/ResPilot/issues" target="_blank" rel="noopener">ISSUES</a>
-        <a href="https://github.com/Van1sh-LDu/ResPilot/blob/main/LICENSE.txt" target="_blank" rel="noopener">MIT</a>
+        <a href="https://github.com/Van1sh-LDu/ResPilot/blob/main/COPYRIGHT.md" target="_blank" rel="noopener">版权</a>
       </nav>
     </div>
+    <div class="footer-rights">
+      <span class="rights-mark" aria-hidden="true">©</span>
+      <div class="rights-copy">
+        <b>原创作品 · 保留所有权利</b>
+        <span>未经书面许可，禁止二次开发、再发布或商用。</span>
+      </div>
+      <a class="rights-link" href="https://github.com/Van1sh-LDu/ResPilot/blob/main/COPYRIGHT.md" target="_blank" rel="noopener">版权声明 ↗</a>
+    </div>
     <div class="footer-bottom">
-      <span>© 2026 冷渡-Van1sh · 非官方工具，与游戏开发商、发行商无关联。</span>
+      <span>© 2026 冷渡-Van1sh · 保留所有权利 · 非官方工具，与游戏开发商、发行商无关联。</span>
       <span class="footer-views"><i></i>浏览 <span id="siteViews">—</span></span>
       <span>WINDOWS 10 / 11 x64</span>
     </div>
